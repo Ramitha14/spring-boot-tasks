@@ -1,5 +1,7 @@
 package com.stackroute.controller;
 
+import com.stackroute.exception.TrackAlreadyExistsException;
+import com.stackroute.exception.TrackNotFoundException;
 import com.stackroute.muzix.Track;
 import com.stackroute.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class TrackController {
         try{
             trackService.saveTrack(track);
             responseEntity=new ResponseEntity<String>("Successfully created", HttpStatus.CREATED);
-        }catch (Exception e){
+        }catch (TrackAlreadyExistsException e){
             responseEntity=new ResponseEntity<String>(e.getMessage(),HttpStatus.CONFLICT);
         }
         return responseEntity;
@@ -45,6 +47,19 @@ public class TrackController {
         catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
+    }
+
+    @PutMapping("track")
+    public ResponseEntity<?> updateTrack(@RequestBody Track track){
+        ResponseEntity responseEntity;
+        try {
+            trackService.updateTrack(track);
+            responseEntity = new ResponseEntity<>("Successfully updated", HttpStatus.OK);
+
+        }catch (TrackNotFoundException e){
+            responseEntity = new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+        return responseEntity;
     }
 
 

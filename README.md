@@ -6,3 +6,7 @@ Tasks to be Done Post Demo
 
 3. Add an endpoint to search trackByName. Understand @Query and parameter passing to
 @Query
+
+5. Create custom exceptions TrackNotFoundException, TrackAlreadyExistsException in a
+com.stack....exceptions package. Perform appropriate exception handling and propagation
+Back.
