@@ -4,15 +4,17 @@ import com.stackroute.exception.TrackAlreadyExistsException;
 import com.stackroute.exception.TrackNotFoundException;
 import com.stackroute.muzix.Track;
 import com.stackroute.service.TrackService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("api/v1")
+@Api(tags = {"Track Controller"})
+
 public class TrackController {
 
     private TrackService trackService;
@@ -22,6 +24,7 @@ public class TrackController {
         this.trackService = trackService;
     }
 
+    @ApiOperation(value = "Insert/update a track", response = ResponseEntity.class)
     @PostMapping(value = "track")
     public ResponseEntity<?>saveTrack(@RequestBody Track track){
         ResponseEntity responseEntity;
@@ -34,11 +37,13 @@ public class TrackController {
         return responseEntity;
     }
 
+    @ApiOperation(value = "Get a list of all available tracks", response = ResponseEntity.class)
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks(){
         return new ResponseEntity<>(trackService.getAllTracks(), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Get the track by id", response = ResponseEntity.class)
     @GetMapping("track/{id}")
     public ResponseEntity<?> getTrack( String id){
         try {
@@ -48,7 +53,7 @@ public class TrackController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
-
+    @ApiOperation(value = "update the track", response = ResponseEntity.class)
     @PutMapping("track")
     public ResponseEntity<?> updateTrack(@RequestBody Track track){
         ResponseEntity responseEntity;
@@ -62,7 +67,7 @@ public class TrackController {
         return responseEntity;
     }
 
-
+    @ApiOperation(value = "Delete the track of given id", response = ResponseEntity.class)
     @PostMapping("track/{id}")
     public ResponseEntity<?> deleteTrack( String id){
         ResponseEntity responseEntity;
@@ -76,8 +81,9 @@ public class TrackController {
         return responseEntity;
     }
 
-    @GetMapping("trc/{name}")
-    public ResponseEntity<?> getTrackByName(@PathVariable String name){
+    @ApiOperation(value = "Search all tracks by name", response = ResponseEntity.class)
+    @GetMapping("track/search/{name}")
+    public ResponseEntity<?> searchTrack(@PathVariable String name){
         return new ResponseEntity<>(trackService.getTrackByName(name), HttpStatus.OK);
 
     }
