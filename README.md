@@ -11,4 +11,7 @@ Tasks to be Done Post Demo
 com.stack....exceptions package. Perform appropriate exception handling and propagation
 Back.
 
-4. Generate API documentation using Swagger 2
+4. Generate API documentation using Swagger 2.
+
+9) Add @Lombok
+(https://drive.google.com/file/d/1QQpEQZbDD9pmW2qrhYsx5N9XYQ5bJ5dM/view)
