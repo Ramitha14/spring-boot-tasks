@@ -60,4 +60,11 @@ public class TrackController {
         }
         return responseEntity;
     }
+
+    @GetMapping("trc/{name}")
+    public ResponseEntity<?> getTrackByName(@PathVariable String name){
+        return new ResponseEntity<>(trackService.getTrackByName(name), HttpStatus.OK);
+
+    }
+
 }
