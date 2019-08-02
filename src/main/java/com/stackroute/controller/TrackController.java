@@ -2,7 +2,7 @@ package com.stackroute.controller;
 
 import com.stackroute.exception.TrackAlreadyExistsException;
 import com.stackroute.exception.TrackNotFoundException;
-import com.stackroute.muzix.Track;
+import com.stackroute.mongoDB.Track;
 import com.stackroute.service.TrackService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +25,7 @@ public class TrackController {
     }
 
     @ApiOperation(value = "Insert/update a track", response = ResponseEntity.class)
-    @PostMapping
+    @PostMapping("trackservice")
     public ResponseEntity<?>saveTrack(@RequestBody Track track){
         ResponseEntity responseEntity;
         try{
@@ -79,13 +79,6 @@ public class TrackController {
             responseEntity = new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
         return responseEntity;
-    }
-
-    @ApiOperation(value = "Search all tracks by name", response = ResponseEntity.class)
-    @GetMapping("trackservice/search/{name}")
-    public ResponseEntity<?> searchTrack(@PathVariable String name){
-        return new ResponseEntity<>(trackService.getTrackByName(name), HttpStatus.OK);
-
     }
 
 

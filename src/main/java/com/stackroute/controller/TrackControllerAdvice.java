@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice("com.stackroute.Muzix.controller")
+@ControllerAdvice("com.stackroute.mongoDB.controller")
 public class TrackControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {TrackNotFoundException.class})
